@@ -12,7 +12,7 @@ const AuthToken: React.FC<AuthTokenProps> = ({ onSubmit }) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setToken(inputValue);
-    setIsButtonDisabled(!inputValue.trim()); 
+    setIsButtonDisabled(!inputValue.trim());
   };
 
   const handleSubmit = () => {

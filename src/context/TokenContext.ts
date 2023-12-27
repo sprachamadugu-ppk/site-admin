@@ -19,4 +19,4 @@
 
 import { createContext } from "react";
 
-export const authToken=createContext({token:''});
+export const authToken = createContext({ token: "" });

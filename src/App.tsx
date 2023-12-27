@@ -18,7 +18,7 @@ const App = () => {
       {auth && <AuthToken onSubmit={handleSubmit} />}
       {!auth && (
         <authToken.Provider value={{ token }}>
-        <SiteForm />
+          <SiteForm />
         </authToken.Provider>
       )}
     </>

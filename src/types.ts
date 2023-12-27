@@ -9,10 +9,9 @@ export interface SiteAddPayload {
   tutorials: { id: null }[];
   updatedAt: null | string;
   updatedBy: null | string;
-  writeAdmins: { id: string }[];
+  writeAdmins: { id: any }[];
   _id: null | string;
 }
-
 
 export interface SimulationItem {
   _id: string;
@@ -20,27 +19,30 @@ export interface SimulationItem {
 }
 
 export interface AdminItem {
+  id: any;
   middlename: null | string;
   _id: string;
   firstname: string;
   lastname: string;
 }
 
-
 export interface TutorialItem {
   id: null | string;
 }
 
-export interface Site{
-    siteName:string;
-    Location:string;
-    simulations:{id:string}[];
-    siteAdmins:string[]
+export interface Site {
+  siteName: string;
+  Location: string;
+  simulations: {
+    name: string;
+    id: string;
+  }[];
+  siteAdmins: AdminItem[];
 }
 
-export interface FormErrors{
-    siteName:string;
-    Location:string;
-    simulations:string;
-    siteAdmins:string
+export interface FormErrors {
+  siteName: string;
+  Location: string;
+  simulations: string;
+  siteAdmins: string;
 }

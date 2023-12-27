@@ -1,116 +1,3 @@
-// // SiteForm.tsx
-// import React, { useState } from 'react';
-// import {
-//   TextField,
-//   Select,
-//   MenuItem,
-//   InputLabel,
-//   FormControl,
-//   Button,
-//   Box,
-// } from '@mui/material';
-
-// interface SiteFormProps {
-//   onSubmit: (formData: FormData) => void;
-// }
-
-// interface FormData {
-//   sitename: string;
-//   location: string;
-//   simulations: string[];
-//   siteAdmins: string[];
-// }
-
-// const SiteForm: React.FC<SiteFormProps> = ({ onSubmit }) => {
-//   const [formData, setFormData] = useState<FormData>({
-//     sitename: '',
-//     location: '',
-//     simulations: [],
-//     siteAdmins: [],
-//   });
-
-//   const handleInputChange = (fieldName: keyof FormData) => (
-//     e: React.ChangeEvent<HTMLInputElement>
-//   ) => {
-//     setFormData({
-//       ...formData,
-//       [fieldName]: e.target.value,
-//     });
-//   };
-
-//   const handleMultiSelectChange = (fieldName: keyof FormData) => (
-//     e: React.ChangeEvent<{ value: unknown }>
-//   ) => {
-//     setFormData({
-//       ...formData,
-//       [fieldName]: e.target.value as string[],
-//     });
-//   };
-
-//   const handleSubmit = (e: React.FormEvent) => {
-//     e.preventDefault();
-//     onSubmit(formData);
-//   };
-
-//   const simulationsOptions = ['Simulation 1', 'Simulation 2']; // Add more simulation options as needed
-
-//   const siteAdminsOptions = ['Admin 1', 'Admin 2']; // Add more admin options as needed
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-//         <TextField
-//           label="Sitename"
-//           variant="outlined"
-//           value={formData.sitename}
-//           onChange={handleInputChange('sitename')}
-//         />
-//         <TextField
-//           label="Location"
-//           variant="outlined"
-//           value={formData.location}
-//           onChange={handleInputChange('location')}
-//         />
-//         <FormControl variant="outlined">
-//           <InputLabel>Simulations</InputLabel>
-//           <Select
-//             multiple
-//             value={formData.simulations}
-//             onChange={handleMultiSelectChange('simulations')}
-//             label="Simulations"
-//           >
-//             {simulationsOptions.map((option) => (
-//               <MenuItem key={option} value={option}>
-//                 {option}
-//               </MenuItem>
-//             ))}
-//           </Select>
-//         </FormControl>
-//         <FormControl variant="outlined">
-//           <InputLabel>Site Admins</InputLabel>
-//           <Select
-//             multiple
-//             value={formData.siteAdmins}
-//             onChange={handleMultiSelectChange('siteAdmins')}
-//             label="Site Admins"
-//           >
-//             {siteAdminsOptions.map((option) => (
-//               <MenuItem key={option} value={option}>
-//                 {option}
-//               </MenuItem>
-//             ))}
-//           </Select>
-//         </FormControl>
-//         <Button variant="contained" color="primary" type="submit">
-//           Submit Site Form
-//         </Button>
-//       </Box>
-//     </form>
-//   );
-// };
-
-// export default SiteForm;
-
 import { useContext, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 import TextField from "@mui/material/TextField";
@@ -119,7 +6,7 @@ import { Grid, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import { postData } from "../services/site.serivces";
+import { postData } from "../api/api-calls";
 
 import { FormErrors, Site, SiteAddPayload } from "../types";
 import { useFetch } from "./usefetch";
@@ -127,24 +14,22 @@ import { authToken } from "../context/TokenContext";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
-
-
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const SiteForm = () => {
   const initialFormData: Site = {
-    siteName:"",
-    Location:"",
-    simulations:[],
-    siteAdmins:[]
+    siteName: "",
+    Location: "",
+    simulations: [],
+    siteAdmins: [],
   };
 
   const initialFormErrors: FormErrors = {
-    siteName:"",
-    Location:"",
-    simulations:"",
-    siteAdmins:""
+    siteName: "",
+    Location: "",
+    simulations: "",
+    siteAdmins: "",
   };
 
   const [formData, setFormData] = useState<Site>(initialFormData);
@@ -167,7 +52,7 @@ const SiteForm = () => {
       return { ...prevErrors, [field]: error };
     });
   };
-  
+
   const { simulationsData, adminData } = useFetch(token);
 
   const handleSubmit = async () => {
@@ -188,63 +73,45 @@ const SiteForm = () => {
       console.log("Form has errors. Cannot submit.");
       return;
     }
-    
+    console.log(formData.siteAdmins);
+
     try {
       const updatedFormData: SiteAddPayload = {
         companyId: "6583edd0ba0b57bd2d13b7ff",
         createdAt: null,
         createdBy: null,
         location: formData.Location,
-        readAdmins: [{ id:null}],
+        readAdmins: [{ id: null }],
         simulations: formData.simulations.map(({ id }) => ({ id })),
         siteName: formData.siteName,
         tutorials: [{ id: null }],
         updatedAt: null,
         updatedBy: null,
-        writeAdmins: formData.siteAdmins.map(admin => ({ id: admin })),
+        writeAdmins: [{ id: "658a737aa0b8998db3121e1e" }],
         _id: null,
       };
-  
+
       console.log(updatedFormData);
-  
+
       const data = await postData(updatedFormData, token);
       if (data?.status === 200) {
-            handleShowAlert();
-          }
-  
-      // ... existing code ...
+        handleShowAlert();
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
-// const siteAddPayload: SiteAddPayload = {
-//     companyId: "6583edd0ba0b57bd2d13b7ff",
-//     createdAt: null,
-//     createdBy: null,
-//     location: formData.Location,
-//     readAdmins: [{ id: null }],
-//     simulations: formData.simulations.map(({ id }) => ({ _id: id, simulationName: "" })),
-//     siteName: formData.siteName,
-//     tutorials: [{ id: null }],
-//     updatedAt: null,
-//     updatedBy: null,
-//     writeAdmins: formData.siteAdmins.map(admin => ({ id: admin })),  // Initialize with an empty array or other appropriate value
-//     _id: null,
-//   };
 
-//   console.log(siteAddPayload);
-
-//   const data = await postData(siteAddPayload, token);
-//   if (data?.status === 200) {
-//     handleShowAlert();
-//   }
-// };
   const areAllFieldsFilled = Object.values(formData).every((value) =>
-    Array.isArray(value) ? value.length > 0 : value.trim() !== ""
+    Array.isArray(value) ? value.length > 0 : value.trim() !== "",
   );
 
   const handleShowAlert = () => {
     setShowAlert(true);
+    setFormData(initialFormData);
+    setTimeout(() => {
+      handleCloseAlert();
+    }, 3000);
   };
 
   const handleCloseAlert = () => {
@@ -286,9 +153,7 @@ const SiteForm = () => {
                 fullWidth
                 variant="outlined"
                 value={formData.siteName}
-                onChange={(e) =>
-                  handleInputChange("siteName", e.target.value)
-                }
+                onChange={(e) => handleInputChange("siteName", e.target.value)}
                 error={Boolean(formErrors.siteName)}
                 helperText={formErrors.siteName}
               />
@@ -299,9 +164,7 @@ const SiteForm = () => {
                 fullWidth
                 variant="outlined"
                 value={formData.Location}
-                onChange={(e) =>
-                  handleInputChange("Location", e.target.value)
-                }
+                onChange={(e) => handleInputChange("Location", e.target.value)}
                 error={Boolean(formErrors.Location)}
                 helperText={formErrors.Location}
               />
@@ -351,10 +214,10 @@ const SiteForm = () => {
                 options={adminData.map((admin) => ({
                   id: admin.id,
                   firstname: admin.firstname,
-                  lastname:admin.lastname
+                  lastname: admin.lastname,
                 }))}
                 disableCloseOnSelect
-                getOptionLabel={(option) => option.firstname+option.lastname}
+                getOptionLabel={(option) => option.firstname + option.lastname}
                 value={formData.siteAdmins}
                 onChange={(_, newValue) =>
                   handleInputChange("siteAdmins", newValue)
@@ -367,7 +230,7 @@ const SiteForm = () => {
                       style={{ marginRight: 8 }}
                       checked={selected}
                     />
-                    {option.firstname+option.lastname}
+                    {option.firstname + option.lastname}
                   </li>
                 )}
                 style={{ width: "100%" }}
@@ -383,7 +246,7 @@ const SiteForm = () => {
                 )}
               />
             </Grid>
-           
+
             <Grid item xs={12}>
               <Button
                 variant="contained"
