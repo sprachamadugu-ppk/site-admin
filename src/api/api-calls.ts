@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SiteAddPayload } from "../types";
-import { AdminItem, SimulationItem } from "../types";
+import { AdminItem, SimulationItem, SiteData } from "../types";
 
 const baseUrl = "https://dev-admin.sunrises.io/api/";
 
@@ -68,5 +68,27 @@ export const postData = async (formData: SiteAddPayload, authToken: string) => {
     return response;
   } else {
     console.error("Failed to post data:", response.status, response.statusText);
+  }
+};
+
+export const getSites = async (authToken: string) => {
+  const url = "users-by-role?role=siteadmin";
+  const response = await axios.post(baseUrl + url, SiteData, {
+    headers: {
+      Authorization: `Bearer ${authToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (response.status === 200) {
+    const data: any = response.data;
+    return data;
+    console.log(data);
+  } else {
+    console.error(
+      "Failed to fetch site admins:",
+      response.status,
+      response.statusText,
+    );
   }
 };

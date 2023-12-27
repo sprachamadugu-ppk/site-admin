@@ -46,3 +46,84 @@ export interface FormErrors {
   simulations: string;
   siteAdmins: string;
 }
+
+export const SiteData = {
+  draw: 1,
+  columns: [
+    {
+      data: "firstname",
+      name: "",
+      orderable: true,
+      search: {
+        value: "",
+        regex: false,
+      },
+      searchable: true,
+    },
+    {
+      data: "lastname",
+      name: "",
+      orderable: true,
+      search: {
+        value: "",
+        regex: false,
+      },
+      searchable: true,
+    },
+    {
+      data: "middlename",
+      name: "",
+      orderable: true,
+      search: {
+        value: "",
+        regex: false,
+      },
+      searchable: true,
+    },
+    {
+      data: "email",
+      name: "",
+      orderable: true,
+      search: {
+        value: "",
+        regex: false,
+      },
+      searchable: true,
+    },
+    {
+      data: "role",
+      name: "",
+      orderable: true,
+      search: {
+        value: "",
+        regex: false,
+      },
+      searchable: true,
+    },
+  ],
+  length: 10,
+  order: [
+    {
+      column: 0,
+      dir: "asc",
+    },
+  ],
+  search: {
+    value: "",
+    regex: false,
+  },
+  start: 0,
+};
+export interface UserData {
+  middlename: null | string;
+  role: string;
+  _id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+}
+
+export interface dashboard {
+  name: string;
+  count: number;
+}

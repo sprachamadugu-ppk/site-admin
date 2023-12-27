@@ -32,6 +32,7 @@ const AuthToken: React.FC<AuthTokenProps> = ({ onSubmit }) => {
         alignItems: "center",
       }}
     >
+      <h2>Enter Token Here</h2>
       <TextField
         onChange={handleInputChange}
         label="Authorization Token"

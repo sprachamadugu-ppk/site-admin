@@ -13,6 +13,7 @@ import { useFetch } from "./usefetch";
 import { authToken } from "../context/TokenContext";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { useNavigate } from "react-router-dom";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -37,6 +38,8 @@ const SiteForm = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const { token } = useContext(authToken);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (field: keyof Site, value: any) => {
     setFormData((prevData) => ({ ...prevData, [field]: value }));
@@ -117,15 +120,13 @@ const SiteForm = () => {
   const handleCloseAlert = () => {
     setShowAlert(false);
   };
+
+  const handleBack = () => {
+    navigate("/home");
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        minHeight: "100vh",
-      }}
-    >
+    <div style={{ marginLeft: 250 }}>
       <div
         style={{
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
@@ -255,6 +256,12 @@ const SiteForm = () => {
                 disabled={!areAllFieldsFilled}
               >
                 Submit
+              </Button>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Button variant="contained" color="primary" onClick={handleBack}>
+                Back
               </Button>
             </Grid>
           </Grid>
