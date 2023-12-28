@@ -11,12 +11,17 @@ import AuthToken from "./components/TokenForm";
 import { authToken } from "./context/TokenContext";
 import SiteForm from "./components/SiteForm";
 import SiteTable from "./components/Table";
+import DepartmentForm from "./components/DepartmentForm";
+import Dashboard from "./components/Dashboard";
+import NotFound from "./components/NotFound";
 
 const Navigation = () => {
   return (
     <nav>
       <Link to="/site-form">Site Add Form</Link>&nbsp;&nbsp;
-      <Link to="/site-table">Site Admin Table</Link>
+      <Link to="/site-table">Site Admin Table</Link>&nbsp;&nbsp;
+      <Link to="/add-department">Department Add Form</Link>&nbsp;&nbsp;
+      <Link to="/dashboard">Dashboard</Link>
     </nav>
   );
 };
@@ -68,6 +73,9 @@ const App = () => {
           />
           <Route path="/site-form" element={<SiteForm />} />
           <Route path="/site-table" element={<SiteTable />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/404" element={<NotFound />} />
+          <Route path="/add-department" element={<DepartmentForm departmentId="658bf2d1303eb04ba3b84370"/>} />
         </Routes>
       </authToken.Provider>
     </Router>

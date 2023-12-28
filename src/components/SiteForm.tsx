@@ -11,8 +11,8 @@ import { postData } from "../api/api-calls";
 import { FormErrors, Site, SiteAddPayload } from "../types";
 import { useFetch } from "./usefetch";
 import { authToken } from "../context/TokenContext";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import { useNavigate } from "react-router-dom";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -247,7 +247,7 @@ const SiteForm = () => {
                 )}
               />
             </Grid>
-
+            <div style={{ display: "flex", marginTop: "16px",marginLeft:"16px" }}>
             <Grid item xs={12}>
               <Button
                 variant="contained"
@@ -258,12 +258,13 @@ const SiteForm = () => {
                 Submit
               </Button>
             </Grid>
-
+                    &nbsp;&nbsp;
             <Grid item xs={12}>
               <Button variant="contained" color="primary" onClick={handleBack}>
                 Back
               </Button>
             </Grid>
+            </div>
           </Grid>
         </form>
       </div>

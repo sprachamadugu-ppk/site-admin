@@ -127,3 +127,10 @@ export interface dashboard {
   name: string;
   count: number;
 }
+
+export interface  department {
+  departmentName:string;
+  location:string;
+  departmentadmin:string[];
+  sites:string[]
+}
