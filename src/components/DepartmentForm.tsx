@@ -60,7 +60,7 @@ export default function DepartmentEditForm({
   }, [departmentId, token, siteNames]);
 
   const handleBackClick = () => {
-    navigate("/dashbo");
+    navigate("/dashboard");
   };
   const handleInputChange =
     (fieldName: keyof typeof formData) =>
