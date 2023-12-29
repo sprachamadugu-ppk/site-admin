@@ -55,7 +55,7 @@ const App = () => {
           <Route path="/404" element={<NotFound />} />
           <Route
             path="/edit-department"
-            element={<DepartmentForm departmentId="658e623dfa8ef46d16cd127e" />}
+            element={<DepartmentForm departmentId="658e6bd5fa8ef47f78cd239b" />}
           />
         </Routes>
       </authToken.Provider>
