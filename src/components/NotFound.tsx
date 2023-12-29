@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Layout from "./Layout";
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const NotFoundPage: React.FC = () => {
   };
 
   return (
+    <Layout>
     <div>
       <Typography variant="h4" gutterBottom>
         404 - Page Not Found
@@ -22,6 +24,7 @@ const NotFoundPage: React.FC = () => {
         Go to Dashboard
       </Button>
     </div>
+    </Layout>
   );
 };
 

@@ -81,10 +81,10 @@ export default function DepartmentEditForm({
     };
 
   const handleSubmit = async () => {
-    console.log("Form submitted:", formData);
     try {
       await editDepartment(formData, departmentId, token);
-      console.log("Form submitted:", formData);
+      alert('updated successfully');
+      navigate('/dashboard')
     } catch (error) {
       console.error("Error submitting form data:", error);
     }
