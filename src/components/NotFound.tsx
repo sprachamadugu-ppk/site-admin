@@ -1,13 +1,13 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
 
   const redirectToHome = () => {
-    navigate('/home');
+    navigate("/dashboard");
   };
 
   return (
@@ -19,7 +19,7 @@ const NotFoundPage: React.FC = () => {
         The page you are looking for does not exist.
       </Typography>
       <Button variant="contained" color="primary" onClick={redirectToHome}>
-        Go to Home
+        Go to Dashboard
       </Button>
     </div>
   );

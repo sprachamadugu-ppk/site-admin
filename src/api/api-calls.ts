@@ -1,7 +1,6 @@
 import axios from "axios";
-import {  SiteAddPayload, dashboard, department } from "../types";
+import { SiteAddPayload, dashboard, department } from "../types";
 import { AdminItem, SimulationItem, SiteData } from "../types";
-
 
 const baseUrl = "https://dev-admin.sunrises.io/api/";
 
@@ -93,12 +92,15 @@ export const postData = async (formData: SiteAddPayload, authToken: string) => {
   }
 };
 
-
-export const editDepartment = async (formData: department, departmentId: string, authToken: string) => {
-  const url='edit-department'
+export const editDepartment = async (
+  formData: department,
+  departmentId: string,
+  authToken: string,
+) => {
+  const url = "edit-department";
   try {
     const response = await axios.put(
-     baseUrl+url ,
+      baseUrl + url,
       {
         ...formData,
         primaryAddress: null,
@@ -107,18 +109,22 @@ export const editDepartment = async (formData: department, departmentId: string,
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (response.status === 200) {
       return response.data;
     } else {
-      console.error('Failed to edit department:', response.status, response.statusText);
+      console.error(
+        "Failed to edit department:",
+        response.status,
+        response.statusText,
+      );
     }
   } catch (error) {
-    console.error('Error editing department:', error);
+    console.error("Error editing department:", error);
   }
 };
 
@@ -144,32 +150,33 @@ export const getSites = async (authToken: string) => {
   }
 };
 
-export const sites=async(authToken:string)=>{
-  const url='get-sites';
+export const sites = async (authToken: string) => {
+  const url = "get-sites";
 
-  try{
-    const response=await axios.get(baseUrl+url,{
-      headers:{
+  try {
+    const response = await axios.get(baseUrl + url, {
+      headers: {
         Authorization: `Bearer ${authToken}`,
       },
     });
 
-    if(response.status===200){
-      return response.data
-    }
-    else {
+    if (response.status === 200) {
+      return response.data;
+    } else {
       console.error(
         "Failed to fetch department data:",
         response.status,
-        response.statusText
+        response.statusText,
       );
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Error fetching department data:", error);
   }
-}
-export const getDepartmentById = async (departmentId:string, authToken:string) => {
+};
+export const getDepartmentById = async (
+  departmentId: string,
+  authToken: string,
+) => {
   const url = `get-department-with-id?_id=${departmentId}`;
 
   try {
@@ -186,13 +193,10 @@ export const getDepartmentById = async (departmentId:string, authToken:string) =
       console.error(
         "Failed to fetch department data:",
         response.status,
-        response.statusText
+        response.statusText,
       );
     }
   } catch (error) {
     console.error("Error fetching department data:", error);
   }
 };
-
-
-

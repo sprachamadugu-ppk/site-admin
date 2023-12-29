@@ -128,9 +128,9 @@ export interface dashboard {
   count: number;
 }
 
-export interface  department {
-  departmentName:string;
-  location:string;
-  departmentadmin:string[];
-  sites:string[]
+export interface department {
+  departmentName: string;
+  location: string;
+  departmentadmin: string[];
+  sites: string[];
 }

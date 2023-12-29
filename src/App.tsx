@@ -4,8 +4,6 @@ import {
   Route,
   Routes,
   Navigate,
-  Link,
-  Outlet,
 } from "react-router-dom";
 import AuthToken from "./components/TokenForm";
 import { authToken } from "./context/TokenContext";
@@ -14,27 +12,7 @@ import SiteTable from "./components/Table";
 import DepartmentForm from "./components/DepartmentForm";
 import Dashboard from "./components/Dashboard";
 import NotFound from "./components/NotFound";
-
-const Navigation = () => {
-  return (
-    <nav>
-      <Link to="/site-form">Site Add Form</Link>&nbsp;&nbsp;
-      <Link to="/site-table">Site Admin Table</Link>&nbsp;&nbsp;
-      <Link to="/add-department">Department Add Form</Link>&nbsp;&nbsp;
-      <Link to="/dashboard">Dashboard</Link>
-    </nav>
-  );
-};
-
-const Home = () => {
-  return (
-    <div style={{ marginLeft: 200 }}>
-      <h1>Welcome to the Home Page</h1>
-      <Navigation />
-      <Outlet />
-    </div>
-  );
-};
+import "./App.css";
 
 const App = () => {
   const [token, setToken] = useState<string>("");
@@ -55,15 +33,15 @@ const App = () => {
               auth ? (
                 <AuthToken onSubmit={handleSubmit} />
               ) : (
-                <Navigate to="/home" />
+                <Navigate to="/dashboard" />
               )
             }
           />
           <Route
-            path="/home"
+            path="/dashboard"
             element={
               token ? (
-                <Home />
+                <Dashboard />
               ) : (
                 <>
                   <Navigate to="/" />
@@ -75,7 +53,10 @@ const App = () => {
           <Route path="/site-table" element={<SiteTable />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/404" element={<NotFound />} />
-          <Route path="/add-department" element={<DepartmentForm departmentId="658bf2d1303eb04ba3b84370"/>} />
+          <Route
+            path="/edit-department"
+            element={<DepartmentForm departmentId="658e623dfa8ef46d16cd127e" />}
+          />
         </Routes>
       </authToken.Provider>
     </Router>

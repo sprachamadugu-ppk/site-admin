@@ -11,9 +11,10 @@ import { postData } from "../api/api-calls";
 import { FormErrors, Site, SiteAddPayload } from "../types";
 import { useFetch } from "./usefetch";
 import { authToken } from "../context/TokenContext";
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { useNavigate } from "react-router-dom";
+import Layout from "./Layout";
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -122,11 +123,11 @@ const SiteForm = () => {
   };
 
   const handleBack = () => {
-    navigate("/home");
+    navigate("/dashboard");
   };
 
   return (
-    <div style={{ marginLeft: 250 }}>
+    <Layout>
       <div
         style={{
           boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
@@ -142,7 +143,7 @@ const SiteForm = () => {
         )}
         <form>
           <Typography
-            variant="h4"
+            variant="h5"
             sx={{ color: "black", fontFamily: "Arial, sans-serif" }}
           >
             Site Add Form
@@ -247,28 +248,34 @@ const SiteForm = () => {
                 )}
               />
             </Grid>
-            <div style={{ display: "flex", marginTop: "16px",marginLeft:"16px" }}>
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-                disabled={!areAllFieldsFilled}
-              >
-                Submit
-              </Button>
-            </Grid>
-                    &nbsp;&nbsp;
-            <Grid item xs={12}>
-              <Button variant="contained" color="primary" onClick={handleBack}>
-                Back
-              </Button>
-            </Grid>
+            <div
+              style={{ display: "flex", marginTop: "16px", marginLeft: "16px" }}
+            >
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
+                  disabled={!areAllFieldsFilled}
+                >
+                  Submit
+                </Button>
+              </Grid>
+              &nbsp;&nbsp;
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleBack}
+                >
+                  Back
+                </Button>
+              </Grid>
             </div>
           </Grid>
         </form>
       </div>
-    </div>
+    </Layout>
   );
 };
 

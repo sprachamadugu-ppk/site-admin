@@ -10,10 +10,12 @@ import {
   Paper,
   Grid,
   Button,
+  Typography,
 } from "@mui/material";
 import { UserData } from "../types";
 import { authToken } from "../context/TokenContext";
 import { useNavigate } from "react-router-dom";
+import Layout from "./Layout";
 
 const SiteTable = () => {
   const [siteData, setsiteData] = useState<UserData[]>([]);
@@ -31,47 +33,56 @@ const SiteTable = () => {
   }, []);
 
   const handleBack = () => {
-    navigate("/home");
+    navigate("/dashboard");
   };
 
   const renderTable = () => {
     return (
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell>Middle Name</TableCell>
-              <TableCell>Email</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {siteData.map((site, index) => (
-              <TableRow key={index} hover style={{ cursor: "pointer" }}>
-                <TableCell>{site.firstname}</TableCell>
-                <TableCell>{site.lastname}</TableCell>
-                <TableCell>{site.middlename}</TableCell>
-                <TableCell>{site.email}</TableCell>
+      <Layout>
+        <Typography variant="h5">Site Details</Typography>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Middle Name</TableCell>
+                <TableCell>Email</TableCell>
               </TableRow>
-            ))}
-            <br />
-            <Grid item xs={12}>
-              <Button variant="contained" color="primary" onClick={handleBack}>
-                Back
-              </Button>
-            </Grid>
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {siteData.map((site, index) => (
+                <TableRow key={index} hover style={{ cursor: "pointer" }}>
+                  <TableCell>{site.firstname}</TableCell>
+                  <TableCell>{site.lastname}</TableCell>
+                  <TableCell>{site.middlename}</TableCell>
+                  <TableCell>{site.email}</TableCell>
+                </TableRow>
+              ))}
+              <br />
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleBack}
+                >
+                  Back
+                </Button>
+              </Grid>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Layout>
     );
   };
 
   return (
-    <div style={{ marginLeft: 300 }}>
-      <h2>site Details</h2>
+    <Layout>
+      {/* <div style={{ marginLeft: 300 }}> */}
+      {/* <h2>site Details</h2> */}
       {siteData.length > 0 ? renderTable() : "Loading..."}
-    </div>
+      {/* </div> */}
+    </Layout>
   );
 };
 
