@@ -9,3 +9,6 @@ div#root {
 h5.MuiTypography-root.MuiTypography-h5.css-ag7rrr-MuiTypography-root {
   padding-bottom: 15px;
 }
+.capitalize {
+  text-transform: capitalize;
+}

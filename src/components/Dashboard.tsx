@@ -28,7 +28,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Layout>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom >
         Dashboard
       </Typography>
       <Grid container spacing={3}>
@@ -40,7 +40,7 @@ const Dashboard: React.FC = () => {
             >
               <Card>
                 <CardContent>
-                  <Typography variant="h6" component="div">
+                  <Typography variant="h6" component="div" className="capitalize" >
                     {item.name}
                   </Typography>
                   <Typography variant="subtitle1" component="div">

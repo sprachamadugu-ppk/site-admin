@@ -5,7 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "types": ["@mui/icons-material"],
+    "types": ["@mui/icons-material","node"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
